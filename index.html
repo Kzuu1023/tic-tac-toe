@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Tic Tac Toe</title>
+    </head>
+    <body>
+        <section class="tic__tac__toe--container">
+            <div class="card">
+                <header class="header">
+                    <div class="logo__header">
+                        <img src="assets/logo.svg" alt="header-icon" />
+                    </div>
+                    <div class="repeat__icon--header">
+                        <img
+                            class="repeat__icon"
+                            src="assets/icon-restart.svg"
+                            alt="header-restart"
+                        />
+                    </div>
+                </header>
+                <main class="viewport">
+                    <section class="board__grid">
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                        <button class="tiles"></button>
+                    </section>
+                    <section class="score__board">
+                        <div class="your__score">
+                            <span>X (YOU)</span>
+                            <span class="msg"></span>
+                        </div>
+                        <div class="ties__score">
+                            <span>TIES</span>
+                            <span class="msg"></span>
+                        </div>
+                        <div class="cpu__score">
+                            <span>O (CPU)</span>
+                            <span class="msg"></span>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </section>
+    </body>
+</html>

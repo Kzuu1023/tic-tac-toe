@@ -1,0 +1,103 @@
+:root {
+    --default-bg-color: #1a2a33;
+    --default-tiles-color: #1f3641;
+
+    --default-icon-bg-color: #f2f2f2;
+
+    --your-score-btn-color: #31c3bd;
+    --ties-score-btn-color: #979797;
+    --cpu-score-btn-color: #f2b137;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--default-bg-color);
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+.tic__tac__toe--container {
+    width: 90rem;
+    height: 56.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tic__tac__toe--container .card {
+    width: 28.75rem;
+    height: 38.94rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 19px;
+}
+
+.header .repeat__icon--header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    background-color: var(--default-icon-bg-color);
+    border-radius: 10px;
+    box-shadow: 0px 4px 0px 0px #6d8a99;
+}
+.viewport .board__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.board__grid .tiles {
+    width: 8.75rem;
+    height: 8.75rem;
+    background-color: var(--default-tiles-color);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.viewport .score__board {
+    display: flex;
+    align-items: center;
+    margin-top: 19px;
+    gap: 19px;
+}
+
+.score__board div {
+    display: flex;
+
+    justify-content: center;
+    width: 8.75rem;
+    height: 4.5rem;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.score__board .your__score {
+    background-color: var(--your-score-btn-color);
+}
+
+.score__board .ties__score {
+    background-color: var(--ties-score-btn-color);
+}
+
+.score__board .cpu__score {
+    background-color: var(--cpu-score-btn-color);
+}
