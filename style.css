@@ -21,6 +21,10 @@ body {
     font-weight: 500;
 }
 
+button {
+    cursor: pointer;
+}
+
 .tic__tac__toe--container {
     width: 90rem;
     height: 56.25rem;
