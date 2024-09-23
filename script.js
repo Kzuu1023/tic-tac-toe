@@ -1,7 +1,10 @@
 const tiles = document.querySelectorAll(".tiles");
 const playerScore = document.querySelectorAll(".msg");
+const restartBtn = document.querySelector(".restart");
 let spaces = Array(9).fill(null);
 let currentPlayer = "";
+let player1, player2;
+
 let score = "";
 
 const winCombination = [
@@ -24,7 +27,6 @@ function startGame() {
 
 function gameBoard() {
     let askPlayer = prompt("X or O").toUpperCase();
-    let player1, player2;
 
     if (askPlayer !== "X" && askPlayer !== "O") {
         alert("Invalid choice. Please choose X or O.");
@@ -65,11 +67,35 @@ function gameBoard() {
     });
 }
 
-function determineWinner() {
-    if (currentPlayer === winCombination) {
-        score++;
-        playerScore.textContent = score;
-    }
+function restart() {
+    restartBtn.addEventListener("click", function () {
+        spaces.fill(null);
+        tiles.forEach((box) => {
+            box.innerHTML = "";
+
+            currentPlayer = player1;
+        });
+    });
 }
 
+function checkTiles() {
+    tiles.forEach((tile) => {
+        tile.addEventListener("mouseover", function () {
+            if (tile.classList.contains("occupied")) return;
+
+            if (currentPlayer === "./assets/icon-x.svg") {
+                tile.innerHTML = '<img src="./assets/icon-x-outline.svg"/>';
+            } else {
+                tile.innerHTML = '<img src="./assets/icon-o-outline.svg"/>';
+            }
+        });
+
+        tile.addEventListener("mouseleave", function () {
+            tile.querySelector("img").remove();
+        });
+    });
+}
+
+restart();
+checkTiles();
 startGame();
