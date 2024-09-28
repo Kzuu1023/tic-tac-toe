@@ -105,3 +105,10 @@ button {
 .score__board .cpu__score {
     background-color: var(--cpu-score-btn-color);
 }
+
+.score__board .your__score,
+.score__board .cpu__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

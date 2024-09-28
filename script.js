@@ -1,39 +1,29 @@
 const tiles = document.querySelectorAll(".tiles");
-const playerScore = document.querySelectorAll(".msg");
+
 const restartBtn = document.querySelector(".restart");
+let winnerIndicator = document.querySelectorAll(".msg");
+let tieScore = document.querySelector(".tie-score");
 let spaces = Array(9).fill(null);
 let currentPlayer = "";
 let player1, player2;
-
-let score = "";
-
-const winCombination = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-];
+let score = 0;
 
 function startGame() {
     let ask = prompt("Wanna play a game?");
     if (ask.toUpperCase() === "Y") {
-        gameBoard();
+        askPlayer();
     }
 }
 
-function gameBoard() {
-    let askPlayer = prompt("X or O").toUpperCase();
+function askPlayer() {
+    let playerChoices = prompt("X or O").toUpperCase();
 
-    if (askPlayer !== "X" && askPlayer !== "O") {
+    if (playerChoices !== "X" && playerChoices !== "O") {
         alert("Invalid choice. Please choose X or O.");
         return;
     }
 
-    switch (askPlayer) {
+    switch (playerChoices) {
         case "X":
             player1 = "./assets/icon-x.svg";
             player2 = "./assets/icon-o.svg";
@@ -45,7 +35,10 @@ function gameBoard() {
         default:
             return;
     }
+    gameBoard();
+}
 
+function gameBoard() {
     currentPlayer = player1;
 
     tiles.forEach((tilesBtn, index) => {
@@ -63,6 +56,19 @@ function gameBoard() {
             } else {
                 currentPlayer = player1;
             }
+
+            let winner = determineWinner();
+
+            if (winner) {
+                console.log("Winner:", winner);
+                score += 1;
+                winnerIndicator.forEach((indicator) => {
+                    indicator.innerHTML = score;
+                });
+            } else if (!spaces.includes(null)) {
+                score += 1;
+                tieScore.innerHTML = score;
+            }
         });
     });
 }
@@ -78,24 +84,28 @@ function restart() {
     });
 }
 
-function checkTiles() {
-    tiles.forEach((tile) => {
-        tile.addEventListener("mouseover", function () {
-            if (tile.classList.contains("occupied")) return;
+const winCombination = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+];
 
-            if (currentPlayer === "./assets/icon-x.svg") {
-                tile.innerHTML = '<img src="./assets/icon-x-outline.svg"/>';
-            } else {
-                tile.innerHTML = '<img src="./assets/icon-o-outline.svg"/>';
-            }
-        });
+function determineWinner() {
+    for (const board of winCombination) {
+        let [a, b, c] = board;
 
-        tile.addEventListener("mouseleave", function () {
-            tile.querySelector("img").remove();
-        });
-    });
+        if (spaces[a] && spaces[a] === spaces[b] && spaces[a] === spaces[c]) {
+            console.log([a, b, c]);
+            return [a, b, c];
+        }
+    }
+    return false;
 }
 
 restart();
-checkTiles();
 startGame();
