@@ -107,7 +107,8 @@ button {
 }
 
 .score__board .your__score,
-.score__board .cpu__score {
+.score__board .cpu__score,
+.score__board .ties__score {
     display: flex;
     flex-direction: column;
     align-items: center;

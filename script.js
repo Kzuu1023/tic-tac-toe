@@ -1,12 +1,14 @@
 const tiles = document.querySelectorAll(".tiles");
-
 const restartBtn = document.querySelector(".restart");
-let winnerIndicator = document.querySelectorAll(".msg");
+let player1Score = document.querySelector(".player1__score");
+let player2Score = document.querySelector(".player2__score");
 let tieScore = document.querySelector(".tie-score");
 let spaces = Array(9).fill(null);
 let currentPlayer = "";
 let player1, player2;
-let score = 0;
+let drawScore = 0;
+let score1 = 0;
+let score2 = 0;
 
 function startGame() {
     let ask = prompt("Wanna play a game?");
@@ -57,18 +59,7 @@ function gameBoard() {
                 currentPlayer = player1;
             }
 
-            let winner = determineWinner();
-
-            if (winner) {
-                console.log("Winner:", winner);
-                score += 1;
-                winnerIndicator.forEach((indicator) => {
-                    indicator.innerHTML = score;
-                });
-            } else if (!spaces.includes(null)) {
-                score += 1;
-                tieScore.innerHTML = score;
-            }
+            determineWinner();
         });
     });
 }
@@ -78,7 +69,12 @@ function restart() {
         spaces.fill(null);
         tiles.forEach((box) => {
             box.innerHTML = "";
-
+            drawScore = 0;
+            score1 = 0;
+            score2 = 0;
+            tieScore.innerHTML = drawScore;
+            player1Score.innerHTML = score1;
+            player2Score.innerHTML = score2;
             currentPlayer = player1;
         });
     });
@@ -100,11 +96,24 @@ function determineWinner() {
         let [a, b, c] = board;
 
         if (spaces[a] && spaces[a] === spaces[b] && spaces[a] === spaces[c]) {
+            if (spaces[a] === player1) {
+                console.log("The winner is: " + player1);
+                score1 += 1;
+                player1Score.innerHTML = score1;
+            } else if (spaces[a] === player2) {
+                console.log("The winner is: " + player2);
+                score2 += 1;
+                player2Score.innerHTML = score2;
+            }
             console.log([a, b, c]);
             return [a, b, c];
         }
     }
-    return false;
+    if (!spaces.includes(null)) {
+        drawScore += 1;
+        tieScore.innerHTML = drawScore;
+        return false;
+    }
 }
 
 restart();
